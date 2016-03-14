@@ -56,25 +56,33 @@ public class FXMLDocumentController implements Initializable {
         }
     } 
     
-    private void removeFiles(TreeItem<File> parent) {
-        
-        if(parent.getChildren() != null)
-            for(TreeItem<File> p: parent.getChildren())
-                removeFiles(parent);
-        
-        parent.getParent().getChildren().remove(parent);
-        parent.getValue().delete();
-        
+     private void removeFiles(File parent) {
+               
+        if (parent.isDirectory()) {
+            if(parent.listFiles() != null) {
+                for(File p: parent.listFiles())
+                    removeFiles(p);
+                parent.delete();
+            } else {
+                parent.delete();
+            }      
+        } else 
+            parent.delete();
+             
     }
     
     @FXML
     private void removeFileAction(ActionEvent event) {
         TreeItem<File> selectedItem = treeView.getSelectionModel().getSelectedItem();
-        if(selectedItem != null && selectedItem.getChildren() != null && !selectedItem.equals(rootFile)) {
+        File file = selectedItem.getValue();
+        
+        if(selectedItem != null && file.listFiles() == null && !selectedItem.equals(rootFile)) {
             selectedItem.getParent().getChildren().remove(selectedItem);
             selectedItem.getValue().delete();
-        } else if(selectedItem.getChildren() != null && !selectedItem.equals(rootFile)) {
-            removeFiles(selectedItem);        
+        } else if(file.listFiles() != null && !selectedItem.equals(rootFile)) {
+            removeFiles(file); 
+            selectedItem.getParent().getChildren().remove(selectedItem);
+            
         }
     }    
     
