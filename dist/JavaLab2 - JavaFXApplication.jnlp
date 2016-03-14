@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="JavaLab2 - JavaFXApplication.jnlp">
+  <information>
+    <title>JavaLab2 - JavaFXApplication</title>
+    <vendor>Damian Darczuk</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="JavaLab2 - JavaFXApplication" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="javalab2.javafxapplication.JavaLab2JavaFXApplication"  name="JavaLab2 - JavaFXApplication" />
+  <update check="always"/>
+</jnlp>
