@@ -30,6 +30,15 @@ public class FXMLDocumentController implements Initializable {
     private TreeView<File> treeView;
     
     private final TreeItem<File> rootFile = new TreeItem<>();  
+            
+    @FXML
+    private void addDirectoryAction(ActionEvent event) {
+        TreeItem<File> selectedItem = treeView.getSelectionModel().getSelectedItem();
+        File selectedFile = selectedItem.getValue();
+        File newFile = new File(selectedFile, "new_file_name");
+        newFile.mkdir();
+        selectedItem.getChildren().add(new TreeItem<>(newFile));
+    } 
     
     @FXML
     private void addFileAction(ActionEvent event) {
@@ -49,18 +58,23 @@ public class FXMLDocumentController implements Initializable {
     
     private void removeFiles(TreeItem<File> parent) {
         
+        if(parent.getChildren() != null)
+            for(TreeItem<File> p: parent.getChildren())
+                removeFiles(parent);
+        
+        parent.getParent().getChildren().remove(parent);
+        parent.getValue().delete();
+        
     }
     
     @FXML
     private void removeFileAction(ActionEvent event) {
         TreeItem<File> selectedItem = treeView.getSelectionModel().getSelectedItem();
-        if(selectedItem != null && !selectedItem.equals(rootFile)) {
+        if(selectedItem != null && selectedItem.getChildren() != null && !selectedItem.equals(rootFile)) {
             selectedItem.getParent().getChildren().remove(selectedItem);
             selectedItem.getValue().delete();
-        } else if(selectedItem == null && !selectedItem.equals(rootFile)) {
-            removeFiles(selectedItem);
-            selectedItem.getParent().getChildren().remove(selectedItem);
-            selectedItem.getValue().delete();
+        } else if(selectedItem.getChildren() != null && !selectedItem.equals(rootFile)) {
+            removeFiles(selectedItem);        
         }
     }    
     

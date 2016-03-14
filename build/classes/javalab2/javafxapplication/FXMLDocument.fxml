@@ -12,6 +12,7 @@
     <TreeView fx:id="treeView" layoutX="14.0" layoutY="14.0" prefHeight="372.0" prefWidth="414.0" />
     <Button layoutX="450.0" layoutY="14.0" mnemonicParsing="false" onAction="#openDirectoryChooser" text="Open Directory Chooser" />
     <Button layoutX="450.0" layoutY="54.0" mnemonicParsing="false" onAction="#removeFileAction"  text="Delete" />
-    <Button layoutX="450.0" layoutY="94.0" mnemonicParsing="false" onAction="#addFileAction"  text="Add" />
+    <Button layoutX="450.0" layoutY="94.0" mnemonicParsing="false" onAction="#addFileAction"  text="Add File" />
+    <Button layoutX="450.0" layoutY="134.0" mnemonicParsing="false" onAction="#addDirectoryAction"  text="Add Directory" />
   </children>
 </AnchorPane>
